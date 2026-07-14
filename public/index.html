@@ -12,24 +12,108 @@
   </head>
   <body class="min-h-screen">
     <div class="mx-auto max-w-6xl px-5 pb-20 pt-8 sm:px-6 lg:pt-10">
-      <header class="mb-10">
-        <div>
-          <div class="mb-3 flex items-center gap-3">
-            <div class="brand-mark" aria-hidden="true">
-              <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-                <rect x="3" y="4" width="22" height="27" rx="3" fill="var(--paper-raised)" stroke="var(--ink)" stroke-width="1.7" />
-                <path d="M9 11h10M9 16h13M9 21h8" stroke="var(--ink-soft)" stroke-width="1.6" stroke-linecap="round" />
-                <circle cx="24" cy="22" r="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.8" />
-                <path d="m20.8 22 2 2 4.2-5" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </div>
-            <span class="font-mono text-xs uppercase tracking-[0.22em] text-[var(--ink-soft)]">ResumeFit AI</span>
+      <header class="mb-7 flex items-center justify-between gap-4">
+        <a href="#home" class="flex items-center gap-3">
+          <div class="brand-mark" aria-hidden="true">
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+              <rect x="3" y="4" width="22" height="27" rx="3" fill="var(--paper-raised)" stroke="var(--ink)" stroke-width="1.7" />
+              <path d="M9 11h10M9 16h13M9 21h8" stroke="var(--ink-soft)" stroke-width="1.6" stroke-linecap="round" />
+              <circle cx="24" cy="22" r="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.8" />
+              <path d="m20.8 22 2 2 4.2-5" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
           </div>
-          <h1 class="font-display text-4xl font-semibold leading-[1.04] text-[var(--ink)] sm:text-5xl">
-            Two files.<br />One verdict.
-          </h1>
-        </div>
+          <span class="font-mono text-xs uppercase tracking-[0.22em] text-[var(--ink-soft)]">ResumeFit AI</span>
+        </a>
+        <button id="navStartButton" type="button" class="hidden rounded-full border border-[var(--line)] bg-[var(--paper-raised)] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--ink-soft)] transition hover:border-[var(--teal)] hover:text-[var(--teal)] sm:inline-flex">
+          Start Match
+        </button>
       </header>
+
+      <section id="home" class="home-hero">
+        <div class="home-copy">
+          <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--teal)]">AI Resume Screening</p>
+          <h1 class="mt-4 font-display text-5xl font-semibold leading-[1.02] text-[var(--ink)] sm:text-6xl lg:text-7xl">
+            ResumeFit AI
+          </h1>
+          <p class="mt-5 max-w-2xl text-lg leading-8 text-[var(--ink-soft)]">
+            Compare a resume with a job description and get a hiring-style report with match percentage, missing skills, strengths, risks, and interview questions.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <button id="heroStartButton" type="button" class="run-btn inline-flex items-center justify-center rounded-full px-7 py-3.5 font-mono text-sm uppercase tracking-[0.14em]">
+              Analyze Resume
+            </button>
+            <a href="#workflow" class="inline-flex items-center justify-center rounded-full border border-[var(--line)] bg-[var(--paper-raised)] px-7 py-3.5 font-mono text-sm uppercase tracking-[0.14em] text-[var(--ink-soft)] transition hover:border-[var(--teal)] hover:text-[var(--teal)]">
+              View Flow
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-preview" aria-label="ResumeFit AI report preview">
+          <div class="folder-tab inline-block border border-[var(--line)] border-b-0 bg-[var(--paper-raised)] px-4 pb-3 pt-2">
+            <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-soft)]">Match Preview</span>
+          </div>
+          <div class="file-card rounded-b-xl rounded-tr-xl p-6">
+            <div class="flex items-center gap-5">
+              <div class="mini-gauge">
+                <span class="font-display text-4xl font-semibold">82%</span>
+                <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--ink-soft)]">Fit</span>
+              </div>
+              <div>
+                <p class="font-display text-2xl font-semibold text-[var(--ink)]">Good Match</p>
+                <p class="mt-2 text-sm leading-6 text-[var(--ink-soft)]">Strong frontend skills with a few backend gaps to verify.</p>
+              </div>
+            </div>
+            <div class="mt-6 space-y-4">
+              <div>
+                <div class="mb-1 flex justify-between text-sm font-semibold">
+                  <span>Skills</span>
+                  <span class="font-mono text-[var(--ink-soft)]">88%</span>
+                </div>
+                <div class="h-2 overflow-hidden rounded-full bg-[rgba(218,212,196,0.7)]">
+                  <div class="h-full w-[88%] rounded-full bg-[var(--teal)]"></div>
+                </div>
+              </div>
+              <div>
+                <div class="mb-1 flex justify-between text-sm font-semibold">
+                  <span>Experience</span>
+                  <span class="font-mono text-[var(--ink-soft)]">74%</span>
+                </div>
+                <div class="h-2 overflow-hidden rounded-full bg-[rgba(218,212,196,0.7)]">
+                  <div class="h-full w-[74%] rounded-full bg-[var(--amber)]"></div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="chip chip-good">JavaScript</span>
+              <span class="chip chip-good">Node.js</span>
+              <span class="chip chip-missing">MongoDB</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="workflow" class="mb-12 grid gap-4 md:grid-cols-3">
+        <div class="workflow-step">
+          <p class="panel-label text-[var(--teal)]">01</p>
+          <h2 class="mt-3 font-display text-xl font-semibold">Upload Resume</h2>
+          <p class="mt-2 text-sm leading-6 text-[var(--ink-soft)]">Accepts PDF and DOCX files with privacy-focused memory handling.</p>
+        </div>
+        <div class="workflow-step">
+          <p class="panel-label text-[var(--amber)]">02</p>
+          <h2 class="mt-3 font-display text-xl font-semibold">Add Role Brief</h2>
+          <p class="mt-2 text-sm leading-6 text-[var(--ink-soft)]">Paste the JD and optional HR checklist for stricter screening.</p>
+        </div>
+        <div class="workflow-step">
+          <p class="panel-label text-[var(--rose)]">03</p>
+          <h2 class="mt-3 font-display text-xl font-semibold">Get Report</h2>
+          <p class="mt-2 text-sm leading-6 text-[var(--ink-soft)]">Gemini-first analysis with Groq fallback and structured output.</p>
+        </div>
+      </section>
+
+      <section id="analyzer" class="mb-10">
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--ink-soft)]">Analyzer Workspace</p>
+        <h2 class="mt-2 font-display text-4xl font-semibold leading-tight text-[var(--ink)]">Two files. One verdict.</h2>
+      </section>
 
       <form id="matchForm" class="grid gap-6 md:grid-cols-2">
         <section>

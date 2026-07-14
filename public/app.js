@@ -15,9 +15,18 @@ const runIcon = document.querySelector("#runIcon");
 const errorBox = document.querySelector("#errorBox");
 const report = document.querySelector("#report");
 const scanLine = document.querySelector("#scanLine");
+const heroStartButton = document.querySelector("#heroStartButton");
+const navStartButton = document.querySelector("#navStartButton");
+const analyzer = document.querySelector("#analyzer");
 
 const CIRCUMFERENCE = 2 * Math.PI * 78;
 let requirements = [];
+
+[heroStartButton, navStartButton].forEach((button) => {
+  button?.addEventListener("click", () => {
+    analyzer.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
 
 resumeInput.addEventListener("change", () => {
   const file = resumeInput.files?.[0];
