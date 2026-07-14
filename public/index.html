@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResumeFit AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="min-h-screen">
+    <div class="mx-auto max-w-6xl px-5 pb-20 pt-8 sm:px-6 lg:pt-10">
+      <header class="mb-10">
+        <div>
+          <div class="mb-3 flex items-center gap-3">
+            <div class="brand-mark" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+                <rect x="3" y="4" width="22" height="27" rx="3" fill="var(--paper-raised)" stroke="var(--ink)" stroke-width="1.7" />
+                <path d="M9 11h10M9 16h13M9 21h8" stroke="var(--ink-soft)" stroke-width="1.6" stroke-linecap="round" />
+                <circle cx="24" cy="22" r="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.8" />
+                <path d="m20.8 22 2 2 4.2-5" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <span class="font-mono text-xs uppercase tracking-[0.22em] text-[var(--ink-soft)]">ResumeFit AI</span>
+          </div>
+          <h1 class="font-display text-4xl font-semibold leading-[1.04] text-[var(--ink)] sm:text-5xl">
+            Two files.<br />One verdict.
+          </h1>
+        </div>
+      </header>
+
+      <form id="matchForm" class="grid gap-6 md:grid-cols-2">
+        <section>
+          <div class="folder-tab inline-block border border-[var(--line)] border-b-0 bg-[var(--paper-raised)] px-4 pb-3 pt-2">
+            <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-soft)]">01 - Candidate File</span>
+          </div>
+          <div class="file-card rounded-b-xl rounded-tr-xl p-6">
+            <h2 class="font-display text-2xl font-semibold">Resume</h2>
+            <p class="mb-5 mt-1 text-sm leading-6 text-[var(--ink-soft)]">Upload a PDF or DOCX. The file is processed for the report and discarded after analysis.</p>
+
+            <label id="dropZone" for="resume" class="dropzone block cursor-pointer rounded-lg px-4 py-10 text-center">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" class="mx-auto mb-3 text-[var(--ink-soft)]">
+                <path d="M12 3v12m0-12 4 4m-4-4-4 4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span id="dropLabel" class="block text-sm font-semibold text-[var(--ink)]">Drop resume here, or click to browse</span>
+              <span class="mt-1 block text-xs text-[var(--ink-soft)]">.pdf or .docx, up to 8 MB</span>
+              <input id="resume" name="resume" type="file" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="hidden" />
+            </label>
+
+            <div id="fileRow" class="mt-4 hidden items-center justify-between gap-4 rounded-lg border border-[rgba(15,110,102,0.22)] bg-[var(--teal-soft)] px-4 py-3">
+              <div class="flex min-w-0 items-center gap-3">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" class="shrink-0 text-[var(--teal)]">
+                  <path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span id="fileName" class="truncate font-mono text-sm text-[var(--ink)]"></span>
+              </div>
+              <button id="clearFile" type="button" class="font-mono text-xs text-[var(--ink-soft)] transition hover:text-[var(--rose)]">remove</button>
+            </div>
+
+            <div class="mt-5 rounded-lg border border-[var(--line)] bg-white/60 p-4">
+              <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--teal)]">Privacy</p>
+              <p class="mt-2 text-sm leading-6 text-[var(--ink-soft)]">Resume files are not stored in this app. They are held in memory only long enough for the AI match report, then cleared.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="folder-tab inline-block border border-[var(--line)] border-b-0 bg-[var(--paper-raised)] px-4 pb-3 pt-2">
+            <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-soft)]">02 - Role Brief</span>
+          </div>
+          <div class="file-card rounded-b-xl rounded-tr-xl p-6">
+            <h2 class="font-display text-2xl font-semibold">Requirements</h2>
+            <p class="mb-4 mt-1 text-sm leading-6 text-[var(--ink-soft)]">Paste the job description, then add any HR must-haves as checklist chips.</p>
+
+            <label for="jobDescription" class="mb-2 block font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-soft)]">Job description</label>
+            <textarea id="jobDescription" name="jobDescription" rows="7" placeholder="Paste the full job description here..." class="focus-ring w-full resize-none rounded-lg border border-[var(--line)] bg-white p-3 text-sm leading-6 placeholder:text-[rgba(76,91,120,0.62)]"></textarea>
+
+            <div class="mt-5">
+              <label for="reqInput" class="mb-2 block font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-soft)]">HR checklist</label>
+              <div class="flex gap-2">
+                <input id="reqInput" type="text" placeholder="e.g. React, 3+ years, immediate joiner" class="focus-ring min-w-0 flex-1 rounded-lg border border-[var(--line)] bg-white px-3 py-2 text-sm placeholder:text-[rgba(76,91,120,0.62)]" />
+                <button id="addRequirement" type="button" class="rounded-lg border border-[var(--ink)] px-4 font-mono text-xs uppercase tracking-[0.08em] transition hover:bg-[var(--ink)] hover:text-[var(--paper)]">Add</button>
+              </div>
+              <div id="requirementChips" class="mt-3 flex min-h-9 flex-wrap gap-2"></div>
+            </div>
+          </div>
+        </section>
+      </form>
+
+      <div class="my-10 flex flex-col items-center">
+        <div class="stitch mb-8 w-full max-w-xs"></div>
+        <button id="runButton" type="button" class="run-btn flex items-center gap-3 rounded-full px-8 py-3.5 font-mono text-sm uppercase tracking-[0.16em]" disabled>
+          <span id="runButtonText">Add resume and requirements</span>
+          <span id="buttonSpinner" class="hidden h-4 w-4 animate-spin rounded-full border-2 border-[var(--paper)] border-t-transparent"></span>
+          <svg id="runIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" class="hidden">
+            <path d="M5 12h14m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <p id="errorBox" class="mt-4 hidden max-w-2xl rounded-lg border border-[rgba(166,67,61,0.24)] bg-[var(--rose-soft)] px-4 py-3 text-center text-sm text-[var(--rose)]"></p>
+      </div>
+
+      <section id="report" class="report-enter hidden">
+        <div class="folder-tab inline-block border border-[var(--line)] border-b-0 bg-[var(--paper-raised)] px-4 pb-3 pt-2">
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-soft)]">03 - Match Report</span>
+        </div>
+        <div class="file-card scan-track rounded-b-xl rounded-tr-xl p-6 md:p-8">
+          <div id="scanLine" class="scan-line"></div>
+
+          <div class="grid gap-8 md:grid-cols-[220px_1fr] md:items-center">
+            <div class="flex flex-col items-center">
+              <div class="score-gauge">
+                <svg width="180" height="180" viewBox="0 0 180 180">
+                  <circle class="gauge-ring" cx="90" cy="90" r="78" fill="none" stroke="var(--line)" stroke-width="12"></circle>
+                  <circle id="gaugeFg" class="gauge-ring gauge-fg" cx="90" cy="90" r="78" fill="none" stroke="var(--teal)" stroke-width="12" stroke-linecap="round" stroke-dasharray="490" stroke-dashoffset="490"></circle>
+                </svg>
+                <div class="score-gauge-center">
+                  <span id="scoreNumber" class="font-display text-5xl font-semibold text-[var(--ink)]">0%</span>
+                  <span class="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-soft)]">Overall fit</span>
+                </div>
+              </div>
+              <p id="decision" class="decision-label"></p>
+            </div>
+
+            <div>
+              <p id="candidateName" class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-soft)]">Candidate</p>
+              <h2 id="summaryTitle" class="mt-2 font-display text-3xl font-semibold text-[var(--ink)]">Report ready</h2>
+              <p id="summary" class="mt-3 text-sm leading-6 text-[var(--ink-soft)]"></p>
+
+              <div id="categoryScores" class="mt-6 space-y-5"></div>
+            </div>
+          </div>
+
+          <div class="stitch my-7 w-full"></div>
+
+          <div class="grid gap-8 md:grid-cols-2">
+            <div>
+              <p class="mb-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--teal)]">Matched</p>
+              <div id="matchedSkills" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div>
+              <p class="mb-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--rose)]">Missing</p>
+              <div id="missingSkills" class="flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <div class="mt-8 grid gap-6 lg:grid-cols-3">
+            <div class="note-panel">
+              <p class="panel-label text-[var(--teal)]">Strengths</p>
+              <ul id="strengths" class="mt-3 space-y-2 text-sm leading-6"></ul>
+            </div>
+            <div class="note-panel">
+              <p class="panel-label text-[var(--rose)]">Risks</p>
+              <ul id="risks" class="mt-3 space-y-2 text-sm leading-6"></ul>
+            </div>
+            <div class="note-panel">
+              <p class="panel-label text-[var(--amber)]">Next Questions</p>
+              <ul id="interviewQuestions" class="mt-3 space-y-2 text-sm leading-6"></ul>
+            </div>
+          </div>
+
+          <div class="mt-6 rounded-lg border border-[rgba(15,110,102,0.18)] bg-[var(--teal-soft)] p-4">
+            <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--teal)]">File handling</p>
+            <p id="fileHandlingNote" class="mt-2 text-sm leading-6 text-[var(--ink-soft)]">The uploaded resume was processed for this report and cleared after the result was returned.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
