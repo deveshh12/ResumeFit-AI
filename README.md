@@ -1,60 +1,153 @@
 # ResumeFit AI
 
-An HTML, CSS, JavaScript, Tailwind, Node.js, Gemini API, and Groq fallback app that compares a resume against a job description and HR checklist.
+ResumeFit AI is an AI-powered resume-to-job matching web application. It compares a candidate resume with a job description and optional HR checklist, then generates a structured hiring-style report with a match percentage, missing skills, strengths, risks, and interview questions.
 
-For detailed documentation, see `PROJECT_DOCUMENTATION.md`.
+## Features
 
-## What It Does
+- Upload resumes in PDF or DOCX format
+- Paste a job description
+- Add optional HR checklist requirements
+- Generate AI-based match percentage
+- View matched skills and missing skills
+- Get candidate strengths and hiring risks
+- Generate resume improvement suggestions
+- Generate interview questions
+- Gemini-first AI analysis with Groq fallback
+- Privacy-focused in-memory file handling
 
-- Accepts PDF and DOCX resumes.
-- Accepts a pasted job description.
-- Accepts an optional HR checklist.
-- Sends the resume and role requirements to Gemini first, then uses Groq if Gemini fails and Groq is configured.
-- Returns a Gemini-generated match percentage, decision, matched skills, missing skills, risks, strengths, resume improvements, and interview questions.
+## Tech Stack
 
-## Setup
+- HTML
+- CSS
+- JavaScript
+- Tailwind CSS
+- Node.js
+- Express.js
+- Multer
+- Mammoth
+- pdf-parse
+- Gemini API
+- Groq API
 
-1. Install dependencies:
+## How It Works
 
-   ```bash
-   npm install
-   ```
+1. The user uploads a PDF or DOCX resume.
+2. The user enters a job description and optional HR checklist.
+3. The backend validates the uploaded file.
+4. Gemini analyzes the resume and job requirements.
+5. If Gemini fails, Groq is used as a fallback provider.
+6. The AI returns a structured JSON report.
+7. The frontend displays the match score and hiring insights.
+8. Uploaded resume data is cleared after the request.
 
-2. Create `.env` from `.env.example`:
+## Installation
 
-   ```bash
-   copy .env.example .env
-   ```
+Clone the repository:
 
-3. Add your Gemini API key:
+```bash
+git clone https://github.com/your-username/resumefit-ai.git
+cd resumefit-ai
+```
 
-   ```env
-   GEMINI_API_KEY=your_gemini_api_key_here
-   GEMINI_MODEL=gemini-3.5-flash
-   GEMINI_FALLBACK_MODELS=gemini-3.1-flash-lite,gemini-3-flash
-   GROQ_API_KEY=your_groq_api_key_here
-   GROQ_MODEL=llama-3.3-70b-versatile
-   PORT=3000
-   ```
+Install dependencies:
 
-4. Start the app:
+```bash
+npm install
+```
 
-   ```bash
-   npm start
-   ```
+Create a `.env` file:
 
-5. Open:
+```bash
+copy .env.example .env
+```
 
-   ```txt
-   http://localhost:3000
-   ```
+Add your API keys:
 
-## Notes
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-3.5-flash
+GEMINI_FALLBACK_MODELS=gemini-3.1-flash-lite,gemini-3-flash
+GROQ_API_KEY=your_groq_api_key_here
+GROQ_MODEL=llama-3.3-70b-versatile
+PORT=3000
+```
 
-- PDF resumes are sent to Gemini as document input.
-- DOCX resumes are converted to plain text first, then Gemini performs the resume extraction, comparison, and scoring.
-- Legacy `.doc` files are not supported in this MVP.
-- The app relies on the active AI provider for the match percentage rather than calculating the score locally.
-- Uploaded files are not stored by the app. Multer keeps the resume in memory for the request, and the buffer is cleared after the report is returned.
-- If Gemini returns a temporary high-demand error, the backend retries automatically and then tries the comma-separated fallback models in `GEMINI_FALLBACK_MODELS`.
-- If Gemini still fails and `GROQ_API_KEY` is set, the backend extracts resume text locally and sends the analysis request to Groq using `GROQ_MODEL`.
+Start the app:
+
+```bash
+npm start
+```
+
+Open in browser:
+
+```txt
+http://localhost:3000
+```
+
+## Environment Variables
+
+| Variable | Description |
+| --- | --- |
+| `GEMINI_API_KEY` | Gemini API key |
+| `GEMINI_MODEL` | Primary Gemini model |
+| `GEMINI_FALLBACK_MODELS` | Comma-separated Gemini fallback models |
+| `GROQ_API_KEY` | Groq API key for provider fallback |
+| `GROQ_MODEL` | Groq fallback model |
+| `PORT` | Local server port |
+
+At least one provider key is required. For best reliability, configure both Gemini and Groq.
+
+## API Endpoints
+
+### Health Check
+
+```http
+GET /api/health
+```
+
+Returns server status and configured provider information.
+
+### Analyze Resume
+
+```http
+POST /api/analyze
+```
+
+Request type:
+
+```txt
+multipart/form-data
+```
+
+Fields:
+
+- `resume`: PDF or DOCX resume file
+- `jobDescription`: job description text
+- `hrChecklist`: optional HR checklist text
+
+## Privacy
+
+ResumeFit AI does not permanently store uploaded resumes. Files are handled in memory during the request and cleared after the analysis response is returned.
+
+The resume content is sent to the configured AI provider for analysis.
+
+## Limitations
+
+- Legacy `.doc` files are not supported
+- Scanned PDFs may not work well without OCR
+- AI-generated scores should be reviewed by a human
+- Free deployment platforms may sleep after inactivity
+
+## Future Improvements
+
+- Add authentication
+- Add report export as PDF
+- Add OCR for scanned resumes
+- Add resume history without storing original files
+- Add dashboard for multiple candidates
+- Add automated tests
+- Add rate limiting for production use
+
+## Project Status
+
+This project is an MVP built for learning, portfolio, and placement preparation.
