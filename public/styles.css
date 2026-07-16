@@ -237,6 +237,34 @@ body {
   justify-content: center;
 }
 
+.report-download-btn {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper-raised);
+  padding: 0.7rem 1rem;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  line-height: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.report-download-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #1e3050;
+}
+
+.report-download-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .decision-label {
   max-width: 190px;
   min-height: 2rem;

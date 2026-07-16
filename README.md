@@ -12,6 +12,7 @@ ResumeFit AI is an AI-powered resume-to-job matching web application. It compare
 - Get candidate strengths and hiring risks
 - Generate resume improvement suggestions
 - Generate interview questions
+- Download the generated match report as a readable HTML report
 - Gemini-first AI analysis with Groq fallback
 - Privacy-focused in-memory file handling
 
@@ -38,7 +39,8 @@ ResumeFit AI is an AI-powered resume-to-job matching web application. It compare
 5. If Gemini fails, Groq is used as a fallback provider.
 6. The AI returns a structured JSON report.
 7. The frontend displays the match score and hiring insights.
-8. Uploaded resume data is cleared after the request.
+8. The user can download the generated report as a readable HTML file.
+9. Uploaded resume data is cleared after the request.
 
 ## Installation
 
